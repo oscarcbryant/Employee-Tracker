@@ -45,7 +45,7 @@ https://github.com/oscarcbryant/Employee-Tracker
 
 You can watch this applications video walkthrough via this link below:
 
-https://drive.google.com/file/d/1B-nO5uf0327zm9JR6z8vAhc9LThHADAm/view
+[Click here] (https://drive.google.com/file/d/1B-nO5uf0327zm9JR6z8vAhc9LThHADAm/view)
 
 
 
