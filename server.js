@@ -19,7 +19,9 @@ const openSurvey = () => {
             case "View all Employees":
                 showEmployees()
                 break;
-}
+}}
+    )};
+
 
 const db = mysql.createConnection(
     {
@@ -33,7 +35,7 @@ const db = mysql.createConnection(
 
 db.query('Select * from departments', function(err, results) {
     console.log(results);
-})
+});
 
 const showEmployees = () => {
 
@@ -41,7 +43,7 @@ const showEmployees = () => {
         db.query(`Show employees from role_id`, (err, result) => {}
         )
     )
-}
+};
 
 const init = () => {
     openSurvey()
