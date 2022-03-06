@@ -5,17 +5,35 @@ const cTable = require("console.table");
 
 const openSurvey = () => {
 
-    return inquirer.prompt ([
+   
+
+    inquirer.prompt ([
         {
             type: 'list',
-            name: 'company',
+            name: 'action',
             message: "What would you like to do?",
-            choices: ["View all Employees", "Add Employee", "Update Employee Role", "View all Roles", "Add Role", "View All Departments", "Add Department"]
+            choices: [  "View all Employees", 
+                        "Add Employee", 
+                        "Update Employee Role", 
+                        "View all Roles", 
+                        "Add Role", 
+                        "View All Departments", 
+                        "Add Department"]
         }
-    ])
-    
+    ])    
     .then(answer => {
-        switch (answer.choices) {
+        console.log(answer);
+
+        switch (answer.action) {
+
+            case "View All Departments":
+                showDepartments()
+                break;
+        
+            case "View all Roles":
+                showRoles()
+                break;
+
             case "View all Employees":
                 showEmployees()
                 break;
@@ -29,25 +47,65 @@ const db = mysql.createConnection(
         user: 'root',
         password: '',
         database: 'company_db'
-    },
-    console.log('Connected to company_db database')
-);
+    },function () {
 
-db.query('Select * from departments', function(err, results) {
-    console.log(results);
-});
+        console.log('Connected to company_db database')
+    })
 
-const showEmployees = () => {
+const showDepartments = async () => {
 
-    console.log(
-        db.query(`Show employees from role_id`, (err, result) => {}
-        )
-    )
+    // const db = connect();
+
+    db.query(`Select * from departments`, function (error, results) {
+
+        //console.log(results);
+        console.table(results);
+        openSurvey();
+    });
+};
+
+const showRoles = async () => {
+
+    // const db = connect();
+
+    db.query(`Select * from roles`, function (error, results) {
+
+        //console.log(results);
+        console.table(results);
+        openSurvey();
+    });
+};
+
+const showEmployees = async () => {
+
+    // const db = connect();
+
+    db.query(`Select * from employee`, function (error, results) {
+
+        //console.log(results);
+        console.table(results);
+        openSurvey();
+    });
 };
 
 const init = () => {
+    console.log(`
+    ___   _____   ___   __   ______  
+   / __| |     | |   |_|  | |      | 
+  | |    |     | |        | |      |  
+  | |    |  O  | |        | |   ___| 
+  | |__  |     | |   ||   | |  |    
+  |____| |_____| |___||___| |__|   
+   _____   __     _     _____
+  |     | |  |  |  |   |   __|
+  |     | |  |__|  |   |   |  
+  |  O  | |  _     |   |   __|
+  |     | | | |    |   |  |__
+  |_____| |_| |____|   |_____|
+  
+  `)
     openSurvey()
-    .then((answers) = {})
+
 }
 
 init();
