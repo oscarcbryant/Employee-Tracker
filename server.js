@@ -121,6 +121,65 @@ const addDepartment = async () => {
                     });
 }
 
+const addRole = async () => {
+
+    return inquirer.prompt ([ 
+        {
+            type: 'input',
+            message:'(Required) What is the new role you are including?', 
+            name: 'title',
+        },
+        {
+            type: 'input',
+            message:'(Required) Please enter the "salary" of the new Role?', 
+            name: 'salary',
+        },
+        {
+            type: 'input',
+            message:'(Required) Please enter the department ID of the new Role?', 
+            name: 'id',
+        },
+        ]).then (answer => {
+            // console.log(answer);
+            // let roletitle = answer.title;
+            // console.log(roletitle);
+            // let roleSalary = answer.salary;
+            // let department_id = answer.id
+            // console.log(roleSalary);
+            db.execute(`INSERT INTO roles (title, salary, department_id)
+                        VALUES (?, ?, ?)`,[answer.title, answer.salary, answer.id]);
+                // console.info('Answer:', answer.title, answer.salary);
+            // console.log(db);
+
+        });
+    }
+
+    const addEmployee = async () => {
+    
+        return inquirer.prompt ([ 
+            {
+                type: 'input',
+                message:'(Required) Please enter the First Name of the new employee?', 
+                name: 'first_name',
+            },
+            {
+                type: 'input',
+                message:'(Required) Please enter the Last Name of the employee?', 
+                name: 'last_name',
+            },
+            {
+                type: 'input',
+                message:'(Required) Please enter the Role ID of the employee?', 
+                name: 'role_id',
+            },        
+
+            ]).then (answer => {
+                db.execute(`INSERT INTO employee (role_id, first_name, last_name)
+                            VALUES (?, ?, ?)`,[answer.role_id, answer.first_name, answer.last_name]);
+    
+            });
+    }
+
 const init = () => {
     console.log(`
     ___   _____   ___   __   ______  
