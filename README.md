@@ -17,7 +17,7 @@ Inquirer
 console table
 
 
-## Functionality 
+## Functionality
 
 GIVEN a command-line application that accepts user input
 WHEN I start the application
