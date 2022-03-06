@@ -37,6 +37,18 @@ const openSurvey = () => {
             case "View all Employees":
                 showEmployees()
                 break;
+
+            case "Add Department":
+                addDepartment()
+                break;
+
+            case "Add Role":
+                addRole()
+                break;  
+            
+            case "Add Employee":
+                addEmployee()
+                break; 
 }}
     )};
 
@@ -45,7 +57,7 @@ const db = mysql.createConnection(
     {
         host: 'localhost',
         user: 'root',
-        password: '',
+        password: 'whistler1',
         database: 'company_db'
     },function () {
 
@@ -87,6 +99,27 @@ const showEmployees = async () => {
         openSurvey();
     });
 };
+
+const addDepartment = async () => {
+
+    return inquirer.prompt ([ 
+        {
+            type: 'input',
+            message:'(Required) What is the name of the new Department?', 
+            name: 'department_name',
+        },
+        ]).then((answer)=>{
+            // console.log(answer);
+            // console.log(answer.department_name);
+                    // let department = answer.department_name;
+                    // console.log(department);
+                    db.execute(`INSERT INTO departments (department_name)
+                                                            VALUES (?)`,[answer.department_name]);
+                        console.info('Answer:', answer.department_name);
+                        console.log(addDepartment);
+
+                    });
+}
 
 const init = () => {
     console.log(`
